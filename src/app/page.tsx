@@ -18,17 +18,22 @@ export default function Home() {
             <div className="hero-heading-stage">
               <HeroAsciiEngine />
               <h1 id="intro-heading">
-                Engineering products
-                <span> from idea to production.</span>
+                Human intent.
+                <span>
+                  Machine
+                  <br />
+                  precision.
+                </span>
               </h1>
             </div>
-            <p className="hero-summary">
-              I&apos;m Thúlio, a Product Engineer building full-stack software
-              for complex business workflows. My experience spans product
-              development, application architecture, enterprise integrations,
-              and applied AI.
-            </p>
-            <ProfileLinks />
+            <div className="hero-supporting">
+              <p className="hero-summary">
+                I&apos;m Thúlio Silva, a Product Engineer building thoughtful
+                software for people. My work brings together software
+                architecture, product development, and applied AI.
+              </p>
+              <ProfileLinks />
+            </div>
           </div>
 
           {/*
