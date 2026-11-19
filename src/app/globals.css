@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 :root {
+  --header-height: 4.5rem;
   --deep: #111113;
   --dark: #171719;
   --main: #1e1e20;
@@ -88,11 +89,11 @@ a {
 }
 
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
   z-index: 50;
   width: 100%;
-  height: 4.5rem;
+  height: var(--header-height);
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -191,6 +192,7 @@ a {
 
 .hero-section {
   overflow: clip;
+  padding-top: var(--header-height);
 }
 
 .hero {
@@ -306,10 +308,10 @@ a {
 .hero-ascii-engine {
   position: absolute;
   z-index: 0;
-  top: calc(clamp(4rem, 8vw, 6.5rem) * -1);
-  right: calc(clamp(5rem, 10vw, 10rem) * -1);
+  top: calc(clamp(4rem, 8vw, 6.5rem) * -1 - var(--header-height));
+  right: calc(50% - 50vw);
   bottom: calc(clamp(3rem, 6vw, 5rem) * -1);
-  left: calc(clamp(5rem, 10vw, 10rem) * -1);
+  left: calc(50% - 50vw);
   overflow: hidden;
   pointer-events: none;
 }
@@ -982,12 +984,16 @@ a {
 }
 
 @media (max-width: 760px) {
+  :root {
+    --header-height: 4.1rem;
+  }
+
   .content-frame {
     padding-inline: 1rem;
   }
 
   .site-header {
-    height: 4.1rem;
+    height: var(--header-height);
   }
 
   .header-inner {
@@ -1035,9 +1041,9 @@ a {
   }
 
   .hero-ascii-engine {
-    top: -4rem;
-    right: -2rem;
-    left: -2rem;
+    top: calc(-4rem - var(--header-height));
+    right: calc(50% - 50vw);
+    left: calc(50% - 50vw);
     opacity: 0.45;
   }
 

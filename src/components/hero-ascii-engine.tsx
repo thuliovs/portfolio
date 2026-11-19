@@ -182,6 +182,9 @@ const targets = portraits[firstExpression][0].flatMap((line, row) =>
   [...line].flatMap((glyph, col) => glyph === " " ? [] : [cellIndex(col, row)]));
 const finalTargets = portraits[lastExpression][0].flatMap((line, row) =>
   [...line].flatMap((glyph, col) => glyph === " " ? [] : [cellIndex(col, row)]));
+// Keep the complete control available for future reactivation without leaving
+// an invisible or keyboard-focusable element in the current interface.
+const showAnimationToggle = false;
 // Coverage is derived from the existing aligned maps, not a solid silhouette.
 // It allows rain glyphs (larger than fine glyphs) to be omitted only where
 // they would visually run through occupied portrait cells.
@@ -245,6 +248,8 @@ export function HeroAsciiEngine() {
     let visibleRight = 0;
     let visibleTop = 0;
     let visibleBottom = 0;
+    let compositionTop = 0;
+    let compositionBottom = 0;
     let rainStretch = 1;
     let dpr = 1;
     let levels = {} as Record<Expression, Level[]>;
@@ -297,11 +302,16 @@ export function HeroAsciiEngine() {
       viewportWidth = bounds.width;
       viewportHeight = bounds.height;
       const heroBounds = wrapper.closest(".hero-section")?.getBoundingClientRect();
+      const compositionBounds = wrapper.closest(".hero")?.getBoundingClientRect();
       visibleLeft = Math.max(0, -bounds.left);
       visibleRight = Math.min(viewportWidth, window.innerWidth - bounds.left);
       visibleTop = Math.max(0, (heroBounds?.top ?? bounds.top) - bounds.top);
       visibleBottom = Math.min(viewportHeight,
         (heroBounds?.bottom ?? bounds.bottom) - bounds.top);
+      compositionTop = Math.max(0,
+        (compositionBounds?.top ?? bounds.top) - bounds.top);
+      compositionBottom = Math.min(viewportHeight,
+        (compositionBounds?.bottom ?? bounds.bottom) - bounds.top);
       dpr = Math.min(window.devicePixelRatio || 1, settings.maxDpr);
       canvas.width = Math.max(1, Math.round(viewportWidth * dpr));
       canvas.height = Math.max(1, Math.round(viewportHeight * dpr));
@@ -319,7 +329,7 @@ export function HeroAsciiEngine() {
       portraitHeight = portraitRows.length * portraitCell.height * scale;
       portraitX = window.innerWidth - bounds.left +
         Math.min(settings.edgeOffset, window.innerWidth * 0.14) - portraitWidth;
-      portraitY = (viewportHeight - portraitHeight) / 2;
+      portraitY = (compositionTop + compositionBottom - portraitHeight) / 2;
       cellWidth = portraitWidth / columns;
       cellHeight = portraitHeight / rows;
       rainWidth = portraitRows[0].length * portraitCell.width * baseScale / columns;
@@ -329,7 +339,8 @@ export function HeroAsciiEngine() {
       rainX = window.innerWidth - bounds.left +
         Math.min(settings.edgeOffset, window.innerWidth * 0.14) -
         portraitRows[0].length * portraitCell.width * baseScale;
-      rainY = (viewportHeight - portraitRows.length * portraitCell.height * baseScale) / 2;
+      rainY = (compositionTop + compositionBottom -
+        portraitRows.length * portraitCell.height * baseScale) / 2;
       levels = {} as Record<Expression, Level[]>;
       if (portraitEnabled) {
         for (const expression of new Set<Expression>(["neutral", ...expressionSequence])) {
@@ -913,17 +924,19 @@ export function HeroAsciiEngine() {
         <Image className="hero-ascii-fallback" src="/portraits/neutral-ascii.svg"
           alt="" width={700} height={1000} unoptimized loading="eager" />
       </div>
-      <button className="hero-ascii-toggle hero-ascii-toggle--lod hero-ascii-toggle--c4"
-        type="button"
-        aria-label={paused ? "Resume ASCII animation" : "Pause ASCII animation"}
-        aria-pressed={paused}
-        onClick={() => {
-          pausedRef.current = !pausedRef.current;
-          setPaused(pausedRef.current);
-          window.dispatchEvent(new Event("ascii-animation-toggle"));
-        }}>
-        {paused ? "Play animation" : "Pause animation"}
-      </button>
+      {showAnimationToggle ? (
+        <button className="hero-ascii-toggle hero-ascii-toggle--lod hero-ascii-toggle--c4"
+          type="button"
+          aria-label={paused ? "Resume ASCII animation" : "Pause ASCII animation"}
+          aria-pressed={paused}
+          onClick={() => {
+            pausedRef.current = !pausedRef.current;
+            setPaused(pausedRef.current);
+            window.dispatchEvent(new Event("ascii-animation-toggle"));
+          }}>
+          {paused ? "Play animation" : "Pause animation"}
+        </button>
+      ) : null}
     </>
   );
 }
