@@ -39,6 +39,9 @@ const settings = {
   sweepStrokeLift: 0.22,
   // The rain grid remains at C6 scale; only the portrait footprint grows.
   zoom: 1.12,
+  portraitScaleIncrease: 1.1,
+  compactPortraitScaleIncrease: 1.1,
+  portraitHorizontalShift: -32,
   portraitRightFade: 0.12,
   rain: {
     // Persistent flux, not a phase-dependent construction layer.
@@ -324,12 +327,21 @@ export function HeroAsciiEngine() {
         (portraitRows.length * portraitCell.height);
       const responsiveZoom = window.innerWidth < 1400 ? 1.08 :
         [1, 1.08, 1.12, 1.15].includes(zoomPreview) ? zoomPreview : settings.zoom;
-      const scale = baseScale * responsiveZoom;
+      const approvedScale = baseScale * responsiveZoom;
+      const scaleIncrease = window.innerWidth < 1400
+        ? settings.compactPortraitScaleIncrease
+        : settings.portraitScaleIncrease;
+      const scale = approvedScale * scaleIncrease;
+      const approvedPortraitHeight =
+        portraitRows.length * portraitCell.height * approvedScale;
       portraitWidth = portraitRows[0].length * portraitCell.width * scale;
       portraitHeight = portraitRows.length * portraitCell.height * scale;
       portraitX = window.innerWidth - bounds.left +
-        Math.min(settings.edgeOffset, window.innerWidth * 0.14) - portraitWidth;
-      portraitY = (compositionTop + compositionBottom - portraitHeight) / 2;
+        Math.min(settings.edgeOffset, window.innerWidth * 0.14) +
+        settings.portraitHorizontalShift - portraitWidth;
+      const portraitBottom =
+        (compositionTop + compositionBottom + approvedPortraitHeight) / 2;
+      portraitY = portraitBottom - portraitHeight;
       cellWidth = portraitWidth / columns;
       cellHeight = portraitHeight / rows;
       rainWidth = portraitRows[0].length * portraitCell.width * baseScale / columns;
