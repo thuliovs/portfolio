@@ -215,6 +215,18 @@ a {
 
 .hero {
   position: relative;
+  height: min(
+    64rem,
+    max(
+      calc(100svh - var(--header-height)),
+      calc(
+        clamp(3.6rem, 9.4vw, 8.4rem) * 2.67 +
+        clamp(4rem, 8vw, 6.5rem) +
+        clamp(3rem, 6vw, 5rem) +
+        11.8125rem
+      )
+    )
+  );
   min-height: min(64rem, calc(100svh - 4.5rem));
   display: flex;
   flex-direction: column;
@@ -226,6 +238,7 @@ a {
 .hero-copy {
   width: 100%;
   flex: 1;
+  min-height: 0;
   display: flex;
   flex-direction: column;
 }
@@ -234,10 +247,29 @@ a {
   position: relative;
   isolation: isolate;
   flex: 1;
+  min-height: 0;
   display: flex;
   align-items: center;
   margin-inline: -2rem;
   padding-inline: 2rem;
+}
+
+.hero-animation-reserve {
+  /* Keeps the approved Canvas geometry while editorial copy remains one flow. */
+  height: calc(clamp(3rem, 6vw, 5rem) + 9.8125rem);
+  flex: none;
+}
+
+.hero-editorial {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transform: translate(
+    clamp(0.5rem, 0.7vw, 0.75rem),
+    clamp(0.75rem, 1vw, 1rem)
+  );
 }
 
 .eyebrow {
@@ -251,8 +283,6 @@ a {
 }
 
 .hero h1 {
-  position: relative;
-  z-index: 2;
   max-width: 70rem;
   margin: 0;
   color: var(--contrast);
@@ -262,24 +292,28 @@ a {
   line-height: 0.89;
 }
 
-.hero h1 span {
+.hero-headline-line {
   display: block;
+}
+
+.hero-headline-secondary {
   color: var(--text);
 }
 
 .hero-summary {
   max-width: 42rem;
-  margin: 0;
+  margin: clamp(1.5rem, 2vw, 2rem) 0 0;
   color: var(--text);
   font-size: clamp(1.05rem, 1.8vw, 1.25rem);
   line-height: 1.75;
 }
 
-.hero-supporting {
-  position: relative;
-  z-index: 2;
-  margin-top: clamp(3rem, 6vw, 5rem);
-  transform: translateY(clamp(-7.5rem, -8vw, -5rem));
+.hero-summary span {
+  display: block;
+}
+
+.hero-editorial > .profile-links {
+  margin-top: clamp(1rem, 1.4vw, 1.5rem);
 }
 
 .hero-rain {
@@ -994,6 +1028,10 @@ a {
 }
 
 @media (max-width: 1100px) {
+  .hero-animation-reserve {
+    height: calc(clamp(3rem, 6vw, 5rem) + 6.921875rem);
+  }
+
   /* At this width the large headline needs the entire right-hand column. */
   .hero-portrait {
     display: none;
@@ -1044,23 +1082,28 @@ a {
   }
 
   .hero {
+    height: auto;
     min-height: auto;
     padding-top: 4rem;
   }
 
+  .hero-copy {
+    min-height: auto;
+  }
+
   .hero-heading-stage {
+    min-height: auto;
     margin-inline: -1rem;
     padding-inline: 1rem;
+  }
+
+  .hero-animation-reserve {
+    display: none;
   }
 
   .hero h1 {
     font-size: clamp(3.4rem, 16vw, 5.5rem);
     line-height: 0.92;
-  }
-
-  .hero-supporting {
-    margin-top: 3rem;
-    transform: none;
   }
 
   .hero-rain {

@@ -17,23 +17,30 @@ export default function Home() {
             */}
             <div className="hero-heading-stage">
               <HeroAsciiEngine />
-              <h1 id="intro-heading">
-                Human intent.
-                <span>
-                  Machine
-                  <br />
-                  precision.
-                </span>
-              </h1>
+              <div className="hero-editorial">
+                <h1 id="intro-heading">
+                  <span className="hero-headline-line">Human</span>
+                  <span className="hero-headline-line">intention.</span>
+                  <span className="hero-headline-line hero-headline-secondary">
+                    Machine
+                  </span>
+                  <span className="hero-headline-line hero-headline-secondary">
+                    precision.
+                  </span>
+                </h1>
+                {/*
+                  Alternative statement for future comparison:
+                  “Machines make things possible. Humans make them meaningful.
+                  Great engineering brings the two together.”
+                */}
+                <p className="hero-summary">
+                  <span>Technology expands what humanity can achieve.</span>
+                  <span>Humanity defines what is worth achieving.</span>
+                </p>
+                <ProfileLinks />
+              </div>
             </div>
-            <div className="hero-supporting">
-              <p className="hero-summary">
-                I&apos;m Thúlio Silva, a Product Engineer building thoughtful
-                software for people. My work brings together software
-                architecture, product development, and applied AI.
-              </p>
-              <ProfileLinks />
-            </div>
+            <div className="hero-animation-reserve" aria-hidden="true" />
           </div>
 
           {/*
