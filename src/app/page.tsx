@@ -1,69 +1,147 @@
-import Image from "next/image";
+import Link from "next/link";
+import { HeroAsciiEngine } from "@/components/hero-ascii-engine";
+import { ArrowIcon } from "@/components/icons";
+import { ProjectCard } from "@/components/project-card";
+import { ProfileLinks } from "@/components/profile-links";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main id="main-content">
+      <section className="hero-section" aria-labelledby="intro-heading">
+        <div className="content-frame hero">
+          <div className="hero-copy">
+            {/*
+            <p className="eyebrow">
+              Product Engineer · Full-Stack &amp; Applied AI
+            </p>
+            */}
+            <div className="hero-heading-stage">
+              <HeroAsciiEngine />
+              <h1 id="intro-heading">
+                Engineering products
+                <span> from idea to production.</span>
+              </h1>
+            </div>
+            <p className="hero-summary">
+              I&apos;m Thúlio, a Product Engineer building full-stack software
+              for complex business workflows. My experience spans product
+              development, application architecture, enterprise integrations,
+              and applied AI.
+            </p>
+            <ProfileLinks />
+          </div>
+
+          {/*
+            Temporarily hidden while the hero layout is being refined.
+            <ul className="hero-disciplines" aria-label="Areas of expertise">
+              <li>
+                <span>Focus</span>
+                Full-stack &amp; Applied AI
+              </li>
+              <li>
+                <span>Frontend</span>
+                Next.js · React · TypeScript
+              </li>
+              <li>
+                <span>Backend</span>
+                Node.js · PostgreSQL
+              </li>
+            </ul>
+          */}
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
+      </section>
+
+      <section
+        className="section-block"
+        id="work"
+        aria-labelledby="work-heading"
+      >
+        <div className="content-frame section-content">
+          <div className="section-heading">
+            <div>
+              <p className="eyebrow">Evidence over claims</p>
+              <h2 id="work-heading">Selected work</h2>
+            </div>
+            <p>
+              A small collection of product engineering work, documented with
+              attention to context, constraints, and technical decisions.
+            </p>
+          </div>
+
+          <div className="project-list">
+            <ProjectCard
+              index="01"
+              title="M3 Nexus"
+              description="A provisional case study about product engineering work completed at Emetrês. Public details are intentionally limited pending confidentiality review."
+              tags={["Product engineering", "Full-stack", "Proprietary"]}
+              href="/projects/m3-nexus"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+            <div className="coming-soon-card">
+              <div>
+                <span className="project-number">02</span>
+                <h3>More projects</h3>
+              </div>
+              <span className="status-pill">Coming soon</span>
+            </div>
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      <section
+        className="section-block about-section"
+        id="about"
+        aria-labelledby="about-heading"
+      >
+        <div className="content-frame section-content about-grid">
+          <div>
+            <p className="eyebrow">How I work</p>
+            <h2 id="about-heading">
+              Product thinking,
+              <br />
+              engineering depth.
+            </h2>
+          </div>
+          <div className="about-copy">
+            <p>
+              I start by understanding the business problem, the people
+              involved, and the constraints around it. That context guides what
+              should be built—and what should not.
+            </p>
+            <p>
+              From there, I evaluate architectural trade-offs and develop
+              software end to end, from interfaces and integrations to backend
+              services and data. I prioritize readable systems that remain
+              maintainable as products evolve.
+            </p>
+            <p>
+              I use AI tools pragmatically to accelerate exploration and
+              delivery, while keeping technical review, validation, and
+              responsibility with the engineer.
+            </p>
+            <Link href="#contact" className="text-link">
+              Start a conversation
+              <ArrowIcon />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section
+        className="contact-section"
+        id="contact"
+        aria-labelledby="contact-heading"
+      >
+        <div className="contact-inner">
+          <p className="eyebrow">Contact</p>
+          <h2 id="contact-heading">Let&apos;s build something considered.</h2>
+          <p>
+            For professional opportunities or product engineering
+            conversations, reach me by email or through my public profiles.
+          </p>
+          <ProfileLinks compact />
+        </div>
+      </section>
+    </main>
   );
 }

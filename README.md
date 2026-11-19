@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Thúlio Silva — Portfolio
 
-## Getting Started
+Minimal professional portfolio built with Next.js, TypeScript, Tailwind CSS, and
+MDX. The first release contains a homepage and a provisional case study for M3
+Nexus.
 
-First, run the development server:
+## Local development
+
+Requirements:
+
+- Node.js 20.9 or newer
+- npm
 
 ```bash
+npm install
+cp .env.example .env.local
+# Replace PORTFOLIO_PASSWORD and AUTH_SECRET in .env.local.
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Quality checks
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run lint
+npm run typecheck
+npm run build
+```
 
-## Learn More
+## Content before publishing
 
-To learn more about Next.js, take a look at the following resources:
+1. Review every placeholder in `src/app/projects/m3-nexus/page.mdx`.
+2. Confirm the M3 Nexus copy against contractual and confidentiality
+   obligations.
+3. Add a production domain to metadata and generate a sitemap after the final
+   URL is known.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Private preview access
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The preview is protected on the server by a shared password. Set these variables
+locally in `.env.local` and in the Vercel project's environment settings:
 
-## Deploy on Vercel
+- `PORTFOLIO_AUTH_ENABLED=true`
+- `PORTFOLIO_PASSWORD`: a strong password shared only with reviewers
+- `AUTH_SECRET`: a separate random value of at least 32 characters
+- `PORTFOLIO_PUBLIC=false`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The access cookie is `HttpOnly`, `SameSite=Strict`, secure in production, and
+expires after seven days. Changing either `PORTFOLIO_PASSWORD` or `AUTH_SECRET`
+invalidates existing sessions.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+When the site is approved for public release, set
+`PORTFOLIO_AUTH_ENABLED=false` and `PORTFOLIO_PUBLIC=true`, then redeploy.
+
+Do not add proprietary source code, screenshots, diagrams, customer data,
+credentials, internal documentation, data models, or business rules.
+
+## Deploying to Vercel
+
+After the repository is reviewed and published:
+
+1. Import the Git repository in Vercel.
+2. Keep **Next.js** as the detected framework preset.
+3. Keep the default build command (`npm run build`) and output settings.
+4. Add the private preview environment variables listed above.
+5. Deploy, review the preview URL, then attach the approved production domain.
+
+No database, user accounts, or external authentication service are required.
