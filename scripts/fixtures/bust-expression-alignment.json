@@ -1,0 +1,102 @@
+{
+  "thinking": {
+    "source": "/home/teaga/Pictures/fotosperfil/C\u00e2mera/selecionadas/editadas/com-busto/_DSC2350.png",
+    "outerEyeCenter": [
+      1708.85,
+      2044.5500000000002
+    ],
+    "referenceOuterEyeCenter": [
+      1514.6,
+      2302.3
+    ],
+    "uniformScale": 1.008320117113751,
+    "translationAtEyeCenter": [
+      -194.25,
+      257.75
+    ],
+    "rotationDegrees": 0,
+    "noseBridgeResidualPx": 22.41376714575961,
+    "cropBoxInNeutralCoordinates": [
+      -24,
+      513,
+      3288,
+      5017
+    ],
+    "occupiedFine": 23084
+  },
+  "angry": {
+    "source": "/home/teaga/Pictures/fotosperfil/C\u00e2mera/selecionadas/editadas/com-busto/_DSC2347.png",
+    "outerEyeCenter": [
+      1504.55,
+      2179.8
+    ],
+    "referenceOuterEyeCenter": [
+      1514.6,
+      2302.3
+    ],
+    "uniformScale": 1.0054169517835088,
+    "translationAtEyeCenter": [
+      10.049999999999955,
+      122.5
+    ],
+    "rotationDegrees": 0,
+    "noseBridgeResidualPx": 14.938327478488798,
+    "cropBoxInNeutralCoordinates": [
+      -24,
+      513,
+      3288,
+      5017
+    ],
+    "occupiedFine": 25581
+  },
+  "disgust": {
+    "source": "/home/teaga/Pictures/fotosperfil/C\u00e2mera/selecionadas/editadas/com-busto/_DSC2352.png",
+    "outerEyeCenter": [
+      1592.2,
+      2180.95
+    ],
+    "referenceOuterEyeCenter": [
+      1514.6,
+      2302.3
+    ],
+    "uniformScale": 0.9334613890590759,
+    "translationAtEyeCenter": [
+      -77.60000000000014,
+      121.35000000000036
+    ],
+    "rotationDegrees": 0,
+    "noseBridgeResidualPx": 17.8462371650063,
+    "cropBoxInNeutralCoordinates": [
+      -24,
+      513,
+      3288,
+      5017
+    ],
+    "occupiedFine": 24106
+  },
+  "smile": {
+    "source": "/home/teaga/Pictures/fotosperfil/C\u00e2mera/selecionadas/editadas/com-busto/_DSC2341.png",
+    "outerEyeCenter": [
+      1476.15,
+      2209.55
+    ],
+    "referenceOuterEyeCenter": [
+      1514.6,
+      2302.3
+    ],
+    "uniformScale": 0.9637405414644774,
+    "translationAtEyeCenter": [
+      38.44999999999982,
+      92.75
+    ],
+    "rotationDegrees": 0,
+    "noseBridgeResidualPx": 25.7639858931152,
+    "cropBoxInNeutralCoordinates": [
+      -24,
+      513,
+      3288,
+      5017
+    ],
+    "occupiedFine": 24396
+  }
+}

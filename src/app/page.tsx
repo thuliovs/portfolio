@@ -1,10 +1,26 @@
 import Link from "next/link";
-import { HeroAsciiEngine } from "@/components/hero-ascii-engine";
+import { Suspense } from "react";
+import { HeroAsciiVariantSelector } from "@/components/hero-ascii-variant-selector";
 import { ArrowIcon } from "@/components/icons";
 import { ProjectCard } from "@/components/project-card";
 import { ProfileLinks } from "@/components/profile-links";
 
-export default function Home() {
+async function PortraitSelection({
+  searchParams,
+}: {
+  searchParams: Promise<{ portrait?: string | string[] }>;
+}) {
+  const selected = (await searchParams).portrait;
+  const portrait = selected === "head-only" || selected === "variant-bust-test"
+    ? selected : "bust";
+  return <HeroAsciiVariantSelector portrait={portrait} />;
+}
+
+export default function Home({
+  searchParams,
+}: {
+  searchParams: Promise<{ portrait?: string | string[] }>;
+}) {
   return (
     <main id="main-content">
       <section className="hero-section" aria-labelledby="intro-heading">
@@ -16,7 +32,9 @@ export default function Home() {
             </p>
             */}
             <div className="hero-heading-stage">
-              <HeroAsciiEngine />
+              <Suspense fallback={null}>
+                <PortraitSelection searchParams={searchParams} />
+              </Suspense>
               <div className="hero-editorial">
                 <h1 id="intro-heading">
                   <span className="hero-headline-line">Human</span>

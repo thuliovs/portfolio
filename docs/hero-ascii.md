@@ -1,8 +1,38 @@
 # Hero ASCII
 
-## D2 — five-expression sequence (active)
+## Principal: busto com cinco expressões (fase 4; acabamento aguardando aprovação)
 
-The homepage still mounts only `src/components/hero-ascii-engine.tsx`.
+`/` monta apenas `hero-ascii-engine-bust.tsx`. Para ver a versão head-only
+aprovada, use `/?portrait=head-only` (motor `hero-ascii-engine.tsx` **intacto**).
+`/?portrait=variant-bust-test` continua a montar o motor experimental original,
+preservado byte a byte; há ainda um snapshot idêntico em
+`hero-ascii-engine-bust-baseline.tsx`. A escolha é feita no servidor, e
+`hero-ascii-variant-selector.tsx` importa dinamicamente apenas a variante
+selecionada no cliente. Nenhuma das três instâncias é montada em paralelo.
+
+O fade espacial suaviza **somente os glifos** da região dos ombros e da
+camiseta, sem modificar mapas, células, chuva, geometria ou timings. Detalhes,
+parâmetros, comparação visual, vídeo e procedimento de reversão em
+[bust-final-integration.md](bust-final-integration.md). **A aprovação dos
+cinco mapas é definitiva; a aprovação visual do novo fade ainda não.**
+
+## Registro histórico da fase 3: `variant-bust-test`
+
+**Na fase 3**, `/` mantinha a versão head-only e as cinco expressões,
+sem alterar seu motor nem seus assets. Acesse `/?portrait=variant-bust-test`
+para ver **cinco expressões com busto** no motor experimental; cada URL monta
+um único motor. A geometria/composição/animação do busto neutro foram
+aprovadas visualmente depois da fase 2. A integração de cinco expressões
+aguarda avaliação visual: veja [bust-expressions-phase3.md](bust-expressions-phase3.md)
+e [bust-aspect-phase2.md](bust-aspect-phase2.md) para geometria e limitações.
+O antigo
+`scripts/prepare-bust-variant.py` e seus assets 160 × 180 são tentativas
+históricas; **não** executá-lo para regenerar esta variante.
+
+## D2 — five-expression sequence (head-only preserved)
+
+Historically, the homepage mounted only `src/components/hero-ascii-engine.tsx`
+by default. In phase 4, use `/?portrait=head-only` for this exact engine.
 The fully functional, approved three-expression D engine was preserved
 **before editing** at `src/components/hero-ascii-engine-d1.tsx`. To restore D,
 change only the import in `src/app/page.tsx` from
